@@ -1,23 +1,25 @@
 package application;
 
 import javafx.application.Application;
-import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        BorderPane root = new BorderPane();
-        Scene scene = new Scene(root, 400, 400);
-
-        // O caminho para o recurso deve ser relativo à pasta 'resources', que é a raiz do classpath.
-        scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
-
-        primaryStage.setTitle("JavaFX App");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void start(Stage stage) {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/gui/View.fxml"));
+            Scene scene = new Scene(parent);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
